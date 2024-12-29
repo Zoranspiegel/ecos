@@ -16,8 +16,7 @@ interface PasswordVisibility {
 
 const initialState: User = {
   username: '',
-  password: '',
-  confirm: ''
+  password: ''
 };
 
 export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
@@ -50,18 +49,26 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
     }
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErrors([]);
 
-    if (type === 'signup' && user.password !== user.confirm) {
-      return setErrors((prevState) => [
-        ...prevState,
-        "Passwords doesn't match"
-      ]);
-    }
+    const res = await fetch(`/api/${type}`, {
+      method: 'POST',
+      body: JSON.stringify(user)
+    });
 
-    console.log(user);
+    const resJSON = await res.json();
+
+    if (!res.ok) {
+      if (resJSON.errors) {
+        return setErrors((prevState) => [...prevState, ...resJSON.errors]);
+      } else if (resJSON.error) {
+        return setErrors((prevState) => [...prevState, resJSON.error]);
+      }
+    } else {
+      console.log(user);
+    }
   }
 
   return (
@@ -120,15 +127,17 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
         </div>
       )}
       {errors.length > 0 && (
-        <ul>
+        <ul className='w-[80%]'>
           {errors.map((error, i) => (
-            <li className="list-disc text-redhaus" key={i}>
+            <li className="list-disc text-redhaus text-sm" key={i}>
               {error}
             </li>
           ))}
         </ul>
       )}
-      <button className="w-full mt-4 border-4 border-double border-foreground bg-background px-4 py-2 text-xl hover:border-background hover:bg-foreground hover:text-background hover:font-bold">
+      <button 
+        className="w-full mt-4 border-4 border-double border-foreground bg-background px-4 py-2 text-xl hover:border-background hover:bg-foreground hover:text-background hover:font-bold"
+      >
         Enter
       </button>
     </form>
