@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 interface User {
   username: string;
   password: string;
-  confirm?: string;
+  confirm: string;
 }
 
 interface PasswordVisibility {
@@ -16,7 +17,8 @@ interface PasswordVisibility {
 
 const initialState: User = {
   username: '',
-  password: ''
+  password: '',
+  confirm: ''
 };
 
 export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
@@ -26,6 +28,8 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
     password: false,
     confirm: false
   });
+
+  const router = useRouter();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUser((prevState) => {
@@ -68,6 +72,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
       }
     } else {
       console.log(user);
+      // router.push('/feed');
     }
   }
 
