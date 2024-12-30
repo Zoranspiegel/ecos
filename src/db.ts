@@ -2,6 +2,7 @@ import { Client } from 'pg';
 import env from '@/env';
 
 // LOCAL POSTGRES DATABASE
+
 export function getClient(): Client {
   const client = new Client({
     user: env.PG_USER,

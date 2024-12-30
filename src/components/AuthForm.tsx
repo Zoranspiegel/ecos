@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 
 interface User {
   username: string;
   password: string;
-  confirm: string;
+  confirm?: string;
 }
 
 interface PasswordVisibility {
@@ -17,8 +17,7 @@ interface PasswordVisibility {
 
 const initialState: User = {
   username: '',
-  password: '',
-  confirm: ''
+  password: ''
 };
 
 export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
@@ -30,6 +29,17 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
   });
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (type === 'signup') {
+      setUser((prevState) => {
+        return {
+          ...prevState,
+          confirm: ''
+        };
+      });
+    }
+  }, [type]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUser((prevState) => {
@@ -111,7 +121,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
           {visibility.password ? <FaEyeSlash /> : <FaEye />}
         </div>
       </div>
-      {type === 'signup' && (
+      {(type === 'signup' && user.confirm !== undefined) && (
         <div className="relative w-full flex flex-col">
           <label className="text-lg">Confirm Password</label>
           <input
