@@ -1,4 +1,8 @@
 import { cleanEnv, str, num } from 'envalid';
+import { loadEnvConfig } from '@next/env';
+
+const appDir = process.cwd();
+loadEnvConfig(appDir);
 
 const env = cleanEnv(process.env, {
   JWT_SECRET: str(),
