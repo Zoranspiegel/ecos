@@ -81,8 +81,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
         return setErrors((prevState) => [...prevState, resJSON.error]);
       }
     } else {
-      console.log(user);
-      // router.push('/feed');
+      router.push('/feed');
     }
   }
 

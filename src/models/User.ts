@@ -26,3 +26,12 @@ export const AuthUserSchema = z
       path: ['confirm']
     }
   );
+
+export const UserSchema = z.object({
+  id: z.string().min(1),
+  username: z.string().min(2),
+  avatar: z.string().nullable(),
+  is_admin: z.boolean(),
+  created_at: z.date(),
+  updated_at: z.date()
+});
