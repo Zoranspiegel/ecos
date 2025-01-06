@@ -35,3 +35,5 @@ export const UserSchema = z.object({
   created_at: z.date().or(z.string()),
   updated_at: z.date().or(z.string())
 });
+
+export type User = z.infer<typeof UserSchema>;

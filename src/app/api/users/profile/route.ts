@@ -29,7 +29,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       );
     }
     
-    // LOGGED USER CHECK
+    // LOGGED IN USER CHECK
     const { id } = JSON.parse(payload.sub);
 
     const client = getClient();
