@@ -32,6 +32,6 @@ export const UserSchema = z.object({
   username: z.string().min(2),
   avatar: z.string().nullable(),
   is_admin: z.boolean(),
-  created_at: z.date(),
-  updated_at: z.date()
+  created_at: z.date().or(z.string()),
+  updated_at: z.date().or(z.string())
 });

@@ -1,5 +1,6 @@
 'use client';
 
+import useUserProfile from '@/hooks/useUserProfile';
 import { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
@@ -28,8 +29,9 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
     confirm: false
   });
 
+  const { mutate } = useUserProfile();
   const router = useRouter();
-
+  
   useEffect(() => {
     if (type === 'signup') {
       setUser((prevState) => {
@@ -81,6 +83,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
         return setErrors((prevState) => [...prevState, resJSON.error]);
       }
     } else {
+      mutate();
       router.push('/feed');
     }
   }
