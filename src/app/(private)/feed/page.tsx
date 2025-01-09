@@ -5,36 +5,38 @@ import PostsContainer from '@/components/PostsContainer';
 
 export default function FeedPage() {
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const observerRef = useRef(null);
+  const [loadMore, setLoadMore] = useState(true);
+  const loadMoreRef = useRef(null);
 
   // INFINITE SCROLL INTERSECTION OBSERVER
   useEffect(() => {
+    if (!loadMore) return;
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore) {
+      (entries) => {     
+        if (entries[0].isIntersecting) {
           setPage((prevState) => prevState + 1);
         }
       },
       { root: null, rootMargin: '0px', threshold: 0.1 }
     );
 
-    const currentRef = observerRef.current;
+    const currentLoadMoreRef = loadMoreRef.current;
 
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (currentLoadMoreRef) {
+      observer.observe(currentLoadMoreRef);
     }
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
+      if (currentLoadMoreRef) {    
+        observer.unobserve(currentLoadMoreRef);
       }
     };
-  }, [hasMore]);
+  }, [loadMore]);
 
   // POST PAGES
   const postPages = Array.from({ length: page }, (_, i) => (
-    <PostsContainer key={i} page={i} setHasMore={setHasMore} />
+    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} />
   ));
 
   return (
@@ -42,7 +44,7 @@ export default function FeedPage() {
       <h1>FEED_PAGE</h1>
       <div className="overflow-auto">
         {postPages}
-        <div className="h-2" ref={observerRef}></div>
+        <div className="h-2" ref={loadMoreRef}></div>
       </div>
     </div>
   );

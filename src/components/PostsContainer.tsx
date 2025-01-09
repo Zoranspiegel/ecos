@@ -7,16 +7,16 @@ import PostsSkeleton from '@/skeletons/PostsSkeleton';
 
 export default function PostsContainer({
   page,
-  setHasMore
+  setLoadMore
 }: {
   page: number;
-  setHasMore: Dispatch<SetStateAction<boolean>>;
+  setLoadMore: Dispatch<SetStateAction<boolean>>;
 }) {
   const { data, isLoading, error } = useFeederPosts(page);
 
   useEffect(() => {
-    if (data?.length === 0) setHasMore(false);
-  }, [data, setHasMore]);
+    if (data?.length === 0) setLoadMore(false);
+  }, [data, setLoadMore]);
 
   if (isLoading) return <PostsSkeleton />
 
