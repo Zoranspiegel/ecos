@@ -2,10 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 import PostsContainer from '@/components/PostsContainer';
+import SearchUsers from '@/components/SearchUsers';
+import SearchPosts from '@/components/SearchPosts';
 
 export default function FeedPage() {
   const [page, setPage] = useState(1);
   const [loadMore, setLoadMore] = useState(true);
+  const [search, setSearch] = useState('');
   const loadMoreRef = useRef(null);
 
   // INFINITE SCROLL INTERSECTION OBSERVER
@@ -13,7 +16,7 @@ export default function FeedPage() {
     if (!loadMore) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {     
+      (entries) => {
         if (entries[0].isIntersecting) {
           setPage((prevState) => prevState + 1);
         }
@@ -28,7 +31,7 @@ export default function FeedPage() {
     }
 
     return () => {
-      if (currentLoadMoreRef) {    
+      if (currentLoadMoreRef) {
         observer.unobserve(currentLoadMoreRef);
       }
     };
@@ -40,8 +43,11 @@ export default function FeedPage() {
   ));
 
   return (
-    <div className="h-full p-2 flex flex-col gap-2 overflow-hidden">
-      <h1>FEED_PAGE</h1>
+    <div className="h-full p-2 grid grid-rows-[7%,1fr] gap-4 overflow-hidden">
+      <div className="flex items-center justify-evenly gap-2">
+        <SearchUsers />
+        <SearchPosts setSearch={setSearch} />
+      </div>
       <div className="overflow-auto">
         {postPages}
         <div className="h-2" ref={loadMoreRef}></div>

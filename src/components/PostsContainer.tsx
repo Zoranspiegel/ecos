@@ -3,7 +3,7 @@
 import useFeederPosts from '@/hooks/useFeederPosts';
 import Post from './Post';
 import { useEffect, type Dispatch, type SetStateAction } from 'react';
-import PostsSkeleton from '@/skeletons/PostsSkeleton';
+import PostsSkeleton from '@/components/skeletons/PostsSkeleton';
 
 export default function PostsContainer({
   page,
