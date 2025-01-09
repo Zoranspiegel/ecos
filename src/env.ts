@@ -7,11 +7,11 @@ import { cleanEnv, str, num } from 'envalid';
 
 const env = cleanEnv(process.env, {
   JWT_SECRET: str(),
-  PG_USER: str(),
-  PG_PASSWORD: str(),
-  PG_HOST: str(),
-  PG_DB: str(),
-  PG_PORT: num(),
+  PG_USER: str({ default: '' }),
+  PG_PASSWORD: str({ default: '' }),
+  PG_HOST: str({ default: '' }),
+  PG_DB: str({ default: '' }),
+  PG_PORT: num({ default: '' }),
   POSTGRES_URL: str()
 });
 
