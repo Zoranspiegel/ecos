@@ -11,7 +11,7 @@ const env = cleanEnv(process.env, {
   PG_PASSWORD: str({ default: '' }),
   PG_HOST: str({ default: '' }),
   PG_DB: str({ default: '' }),
-  PG_PORT: num({ default: '' }),
+  PG_PORT: num({ default: 0 }),
   POSTGRES_URL: str()
 });
 
