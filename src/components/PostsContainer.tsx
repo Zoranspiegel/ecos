@@ -2,18 +2,30 @@
 
 import useFeederPosts from '@/hooks/useFeederPosts';
 import Post from './Post';
+import { useEffect, type Dispatch, type SetStateAction } from 'react';
+import PostsSkeleton from '@/skeletons/PostsSkeleton';
 
-export default function PostsContainer() {
-  const { data, isLoading, error } = useFeederPosts(0);
+export default function PostsContainer({
+  page,
+  setHasMore
+}: {
+  page: number;
+  setHasMore: Dispatch<SetStateAction<boolean>>;
+}) {
+  const { data, isLoading, error } = useFeederPosts(page);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  useEffect(() => {
+    if (data?.length === 0) setHasMore(false);
+  }, [data, setHasMore]);
+
+  if (isLoading) return <PostsSkeleton />
 
   if (error) return null;
 
   return (
-    <div className="h-full overflow-auto">
+    <div>
       {data?.map((post) => (
-        <Post key={post.id} post={post}/>
+        <Post key={post.id} post={post} />
       ))}
     </div>
   );

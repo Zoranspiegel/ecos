@@ -18,6 +18,19 @@
   --bauhaus-yellow-color: #dcc574;
 }
 
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--bauhaus-red-color);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bauhaus-blue-color);
+}
+
 body {
   height: 100vh;
   color: var(--foreground);

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Post({ post }: { post: Post }) {
   return (
-    <div key={post.id} className="mb-4 grid grid-cols-[20%,1fr] gap-4">
+    <div key={post.id} className="mb-4 mr-2 grid grid-cols-[20%,1fr] gap-4">
       <div className="relative w-full aspect-square border-4 border-double border-foreground rounded-full overflow-hidden">
         {post.avatar ? (
           <Image

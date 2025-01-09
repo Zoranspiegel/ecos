@@ -38,7 +38,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const postsRes = await client.query(
       `SELECT u.username, u.avatar, p.* FROM public.posts p
-      INNER JOIN public.users u ON p.user_id IN (
+      INNER JOIN public.users u ON p.user_id = u.id
+      WHERE p.user_id  IN (
         SELECT f.user_id FROM public.follows f
         WHERE f.follower_id = $1
       )
