@@ -35,6 +35,7 @@ body {
   height: 100vh;
   color: var(--foreground);
   background: var(--background);
+  background-image: url('../fondos/bauhausGPT.svg');
   font-family: var(--font-bauhaus), Arial, Helvetica, sans-serif;
 }
 

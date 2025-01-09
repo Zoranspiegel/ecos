@@ -31,7 +31,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
 
   const { mutate } = useUserProfile();
   const router = useRouter();
-  
+
   useEffect(() => {
     if (type === 'signup') {
       setUser((prevState) => {
@@ -90,10 +90,10 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
 
   return (
     <form
-      className="w-full max-w-xs border-4 border-double border-foreground p-8 flex flex-col items-center justify-center gap-4"
+      className="w-full max-w-xs border-4 border-double border-foreground bg-background p-8 flex flex-col items-center justify-center gap-4"
       onSubmit={handleSubmit}
     >
-      <h1 className="text-3xl capitalize">{type}</h1>
+      <h1 className="text-5xl capitalize">{type}</h1>
       <div className="w-full flex flex-col">
         <label className="text-lg">Username</label>
         <input
@@ -123,7 +123,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
           {visibility.password ? <FaEyeSlash /> : <FaEye />}
         </div>
       </div>
-      {(type === 'signup' && user.confirm !== undefined) && (
+      {type === 'signup' && user.confirm !== undefined && (
         <div className="relative w-full flex flex-col">
           <label className="text-lg">Confirm Password</label>
           <input
@@ -144,7 +144,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
         </div>
       )}
       {errors.length > 0 && (
-        <ul className='w-[80%]'>
+        <ul className="w-[80%]">
           {errors.map((error, i) => (
             <li className="list-disc text-redhaus text-sm" key={i}>
               {error}
@@ -152,9 +152,7 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
           ))}
         </ul>
       )}
-      <button 
-        className="w-full mt-4 border-4 border-double border-foreground bg-background px-4 py-2 text-xl hover:border-background hover:bg-foreground hover:text-background hover:font-bold"
-      >
+      <button className="w-full mt-4 border-4 border-double border-foreground bg-background px-4 py-2 text-xl hover:border-background hover:bg-foreground hover:text-background hover:font-bold">
         Enter
       </button>
     </form>
