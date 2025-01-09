@@ -24,7 +24,7 @@ export default function HeaderUser() {
       <span className={`${data?.is_admin ? 'text-redhaus' : undefined}`}>
         {data?.username}
       </span>
-      <div className="relative h-[90%] aspect-square border-2 rounded-full flex items-center justify-center overflow-hidden">
+      <div className="relative h-full aspect-square border-4 border-double border-foreground rounded-full flex items-center justify-center overflow-hidden">
         {data?.avatar ? (
           <Image
             src={data?.avatar}
