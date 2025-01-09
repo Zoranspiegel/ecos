@@ -55,7 +55,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    // ERROR RESPONSE
+    // ERROR LOG & RESPONSE
     if (error instanceof Error) {
       console.error(error.stack);
     }

@@ -1,18 +1,20 @@
 'use client';
 
-import useFeederPosts from '@/hooks/useFeederPosts';
+import usePosts from '@/hooks/usePosts';
 import Post from './Post';
 import { useEffect, type Dispatch, type SetStateAction } from 'react';
 import PostsSkeleton from '@/components/skeletons/PostsSkeleton';
 
 export default function PostsContainer({
   page,
-  setLoadMore
+  setLoadMore,
+  content
 }: {
   page: number;
   setLoadMore: Dispatch<SetStateAction<boolean>>;
+  content: string;
 }) {
-  const { data, isLoading, error } = useFeederPosts(page);
+  const { data, isLoading, error } = usePosts(page, content);
 
   useEffect(() => {
     if (data?.length === 0) setLoadMore(false);
