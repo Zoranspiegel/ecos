@@ -20,7 +20,7 @@ export default function PostsContainer({
     if (data?.length === 0) setLoadMore(false);
   }, [data, setLoadMore]);
 
-  if (isLoading) return <PostsSkeleton />
+  if (isLoading) return <PostsSkeleton />;
 
   if (error) return null;
 
