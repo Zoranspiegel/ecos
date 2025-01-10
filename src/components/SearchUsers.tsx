@@ -13,7 +13,7 @@ export default function SearchUsers() {
   }
 
   return (
-    <form className="relative h-full">
+    <form className="relative w-full h-full">
       <input
         className="searchInput"
         type="text"

@@ -14,7 +14,7 @@ export default function Navbar() {
   const pathname = usePathname();  
 
   return (
-    <nav className="border-4 border-double border-foreground bg-background flex items-center justify-evenly">
+    <nav className="border-4 border-double border-foreground rounded-full bg-background flex items-center justify-evenly">
       <Link href="/feed" className={`${pathname.startsWith('/feed') ? 'text-yellowhaus' : undefined} text-2xl`}>
         <FaHome />
       </Link>
