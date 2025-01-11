@@ -21,7 +21,7 @@ export default function HeaderUser() {
 
   return (
     <div className="h-full flex items-center justify-center gap-2">
-      <span className={`${data?.is_admin ? 'text-redhaus' : undefined}`}>
+      <span className={`text-xl ${data?.is_admin ? 'text-redhaus' : ''}`}>
         {data?.username}
       </span>
       <div className="relative h-full aspect-square border-4 border-double border-foreground rounded-full flex items-center justify-center overflow-hidden">

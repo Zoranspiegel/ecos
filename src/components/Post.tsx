@@ -18,7 +18,7 @@ export default function Post({ post }: { post: Post }) {
         )}
       </div>
       <div className='flex flex-col'>
-        <h1 className='text-xl font-bold'>{post.username}</h1>
+        <h1 className={`text-xl font-bold ${post.is_admin ? 'text-redhaus' : ''}`}>{post.username}</h1>
         <span className='mb-2 text-xs opacity-50'>{`Created ${new Date(post.created_at).toLocaleString(
           'en-us',
           {
