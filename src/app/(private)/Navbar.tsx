@@ -17,20 +17,20 @@ export default function Navbar() {
 
   return (
     <nav className="border-4 border-double border-foreground rounded-l-full bg-background flex items-center justify-evenly">
-      <Link href="/feed" className={`${pathname.startsWith('/feed') ? 'text-redhaus' : 'text-foreground'} text-2xl`}>
+      <Link href="/feed" className={`${pathname.startsWith('/feed') ? 'text-redhaus' : 'text-foreground'} text-4xl`}>
         <FaHome />
       </Link>
-      <Link href="/post" className={`${pathname.startsWith('/post') ? 'text-redhaus' : 'text-foreground'} text-xl`}>
+      <Link href="/post" className={`${pathname.startsWith('/post') ? 'text-redhaus' : 'text-foreground'} text-3xl`}>
         <FaComment />
       </Link>
-      <Link href="/followers" className={`${pathname.startsWith('/followers') ? 'text-redhaus' : 'text-foreground'} text-2xl`}>
+      <Link href="/followers" className={`${pathname.startsWith('/followers') ? 'text-redhaus' : 'text-foreground'} text-4xl`}>
         <FaUserFriends />
       </Link>
-      <Link href="/following" className={`${pathname.startsWith('/following') ? 'text-redhaus' : 'text-foreground'} text-2xl`}>
+      <Link href="/following" className={`${pathname.startsWith('/following') ? 'text-redhaus' : 'text-foreground'} text-4xl`}>
         <FaUsers />
       </Link>
       {data?.is_admin && (
-        <Link href="/admin" className={`${pathname.startsWith('/admin') ? 'text-redhaus' : 'text-yellowhaus'} text-xl`}>
+        <Link href="/admin" className={`${pathname.startsWith('/admin') ? 'text-redhaus' : 'text-yellowhaus'} text-3xl`}>
           <FaCog />
         </Link>
       )}
