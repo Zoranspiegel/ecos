@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useUserProfile from '@/hooks/useUserProfile';
 import Image from 'next/image';
+import Loading from './Loading';
 
 export default function HeaderUser() {
   const { data, isLoading, isValidating, error } = useUserProfile();
@@ -15,7 +16,12 @@ export default function HeaderUser() {
     }
   }, [error, isValidating, router]);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading)
+    return (
+      <div className="h-[30%] pr-6 flex animate-pulse">
+        <Loading />
+      </div>
+    );
 
   if (error) return null;
 

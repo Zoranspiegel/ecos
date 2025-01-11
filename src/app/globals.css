@@ -48,6 +48,6 @@ body {
     @apply w-full h-full px-3 py-1 border-4 border-double border-foreground bg-background outline-none;
   }
   .clearSearchBtn {
-    @apply absolute right-1 bottom-1 h-[80%] aspect-square rounded-l-full bg-redhaus text-background font-bold hover:bg-bluehaus;
+    @apply absolute right-1 bottom-1 h-[80%] aspect-square rounded-l-full bg-redhaus text-background text-xl font-bold hover:bg-bluehaus;
   }
 }
