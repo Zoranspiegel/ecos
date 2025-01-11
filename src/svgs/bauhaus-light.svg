@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60" fill="none">
+<!-- ROW 1 -->
+  <rect x="10" y="0" width="10" height="10" fill="#ff6641"/>
+  <path d="M10,0 L0,0 A10,10 0 0,0 10,10 Z" fill="#fed132"/>
+  <path d="M10,10 L10,0 A10,10 0 0,1 20,10 Z" fill="#fed132"/>
+  <path d="M20,10 L20,0 A10,10 0 0,1 30,10" fill="#211814"/>
+  <circle cx="35" cy="5" r="5" fill="#ff6641"/>
+  <path d="M40,0 L40,10 A10,10 0 0,0 50,0" fill="#236df6"/>
+  <rect x="50" y="0" width="10" height="10" fill="#ff6641"/>
+  <path d="M60,10 L50,10 A10,10 0 0,1 60,0" fill="#fed132"/>
+  <rect x="60" y="0" width="10" height="10" fill="#fed132"/>
+  <path d="M60,10 L60,0 A10,10 0 0,1 70,10" fill="#211814"/>
+  <rect x="70" y="0" width="10" height="10" fill="#236df6"/>
+  <path d="M70,10 L70,0 A10,10 0 0,1 80,10" fill="#fed132"/>
+  <path d="M90,10 L80,10 A10,10 0 0,1 90,0" fill="#ff6641"/>
+  <rect x="90" y="0" width="10" height="10" fill="#ff6641"/>
+<!-- ROW 2 -->
+  <path d="M10,20 L0,20 A10,10 0 0,1 10,10" fill="#236df6"/>
+  <rect x="10" y="10" width="10" height="10" fill="#236df6"/>
+  <path d="M10,10 L10,20 A10,10 0 0,0 20,10" fill="#ff6641"/>
+  <rect x="20" y="10" width="10" height="10" fill="#211814"/>
+  <path d="M20,20 L20,10 A10,10 0 0,1 30,20" fill="#fed132"/>
+  <path d="M40,20 L30,20 A10,10 0 0,1 40,10" fill="#236df6"/>
+  <rect x="40" y="10" width="10" height="10" fill="#ff6641"/>
+  <path d="M40,20 L40,10 A10,10 0 0,1 50,20" fill="#fed132"/>
+  <path d="M50,20 L50,10 A10,10 0 0,1 60,20" fill="#211814"/>
+  <path d="M70,20 L60,20 A10,10 0 0,1 70,10" fill="#236df6"/>
+  <path d="M70,10 L70,20 A10,10 0 0,0 80,10" fill="#ff6641"/>
+  <rect x="80" y="10" width="10" height="10" fill="#211814"/>
+  <path d="M90,20 L80,20 A10,10 0 0,1 90,10" fill="#fed132"/>
+  <circle cx="95" cy="15" r="5" fill="#236df6"/>
+<!-- ROW 3 -->
+  <path d="M10,20 L0,20 A10,10 0 0,0 10,30" fill="#fed132"/>
+  <path d="M10,30 L10,20 A10,10 0 0,1 20,30" fill="#211814"/>
+  <path d="M30,30 L20,30 A10,10 0 0,1 30,20" fill="#ff6641"/>
+  <rect x="30" y="20" width="10" height="10" fill="#211814"/>
+  <path d="M30,30 L30,20 A10,10 0 0,1 40,30" fill="#fed132"/>
+  <rect x="40" y="20" width="10" height="10" fill="#fed132"/>
+  <path d="M40,30 L40,20 A10,10 0 0,1 50,30" fill="#ff6641"/>
+  <path d="M60,20 L50,20 A10,10 0 0,0 60,30" fill="#fed132"/>
+  <rect x="60" y="20" width="10" height="10" fill="#236df6"/>
+  <path d="M60,20 L70,20 A10,10 0 0,1 60,30" fill="#ff6641"/>
+  <rect x="70" y="20" width="10" height="10" fill="#236df6"/>
+  <path d="M80,30 L80,20 A10,10 0 0,1 90,30" fill="#211814"/>
+  <path d="M90,20 L90,30 A10,10 0 0,0 100,20" fill="#fed132"/>
+<!-- ROW 4 -->
+  <circle cx="5" cy="35" r="5" fill="#236df6"/>
+  <rect x="10" y="30" width="10" height="10" fill="#236df6"/>
+  <path d="M10,40 L10,30 A10,10 0 0,1 20,40" fill="#ff6641"/>
+  <path d="M30,30 L20,30 A10,10 0 0,0 30,40" fill="#fed132"/>
+  <path d="M30,40 L30,30 A10,10 0 0,0 40,40" fill="#fed132"/>
+  <path d="M40,30 L40,40 A10,10 0 0,0 50,30" fill="#236df6"/>
+  <path d="M60,30 L50,30 A10,10 0 0,0 60,40" fill="#ff6641"/>
+  <rect x="60" y="30" width="10" height="10" fill="#ff6641"/>
+  <path d="M60,40 L60,30 A10,10 0 0,1 70,40" fill="#236df6"/>
+  <rect x="70" y="30" width="10" height="10" fill="#fed132"/>
+  <path d="M70,40 L70,30 A10,10 0 0,1 80,40" fill="#ff6641"/>
+  <rect x="80" y="30" width="10" height="10" fill="#fed132"/>
+  <path d="M100,40 L90,40 A10,10 0 0,1 100,30" fill="#ff6641"/>
+<!-- ROW 5 -->
+  <rect x="0" y="40" width="10" height="10" fill="#ff6641"/>
+  <path d="M10,40 L0,40 A10,10 0 0,0 10,50" fill="#fed132"/>
+  <rect x="10" y="40" width="10" height="10" fill="#ff6641"/>
+  <path d="M10,40 L20,40 A10,10 0 0,1 10,50" fill="#236df6"/>
+  <path d="M30,50 L20,50 A10,10 0 0,1 30,40" fill="#211814"/>
+  <rect x="30" y="40" width="10" height="10" fill="#ff6641"/>
+  <path d="M30,40 L30,50 A10,10 0 0,0 40,40" fill="#236df6"/>
+  <circle cx="45" cy="45" r="5" fill="#fed132"/>
+  <path d="M60,50 L50,50 A10,10 0 0,1 60,40" fill="#ff6641"/>
+  <path d="M60,40 L60,50 A10,10 0 0,0 70,40" fill="#fed132"/>
+  <path d="M80,40 L70,40 A10,10 0 0,0 80,50" fill="#ff6641"/>
+  <circle cx="85" cy="45" r="5" fill="#211814"/>
+  <path d="M100,40 L90,40 A10,10 0 0,0 100,50" fill="#236df6"/>
+<!-- ROW 6 -->
+  <rect x="0" y="50" width="10" height="10" fill="#211814"/>
+  <rect x="10" y="50" width="10" height="10" fill="#ff6641"/>
+  <path d="M10,50 L10,60 A10,10 0 0,0 20,50" fill="#fed132"/>
+  <path d="M30,50 L20,50 A10,10 0 0,0 30,60" fill="#ff6641"/>
+  <rect x="30" y="50" width="10" height="10" fill="#211814"/>
+  <path d="M30,60 L30,50 A10,10 0 0,1 40,60" fill="#fed132"/>  
+  <path d="M50,60 L40,60 A10,10 0 0,1 50,50" fill="#236df6"/>
+  <path d="M50,50 L50,60 A10,10 0 0,0 60,50" fill="#236df6"/>
+  <path d="M60,60 L60,50 A10,10 0 0,1 70,60" fill="#211814"/>
+  <path d="M80,60 L70,60 A10,10 0 0,1 80,50" fill="#236df6"/>
+  <path d="M80,60 L80,50 A10,10 0 0,1 90,60" fill="#fed132"/>
+  <path d="M90,50 L90,60 A10,10 0 0,0 100,50" fill="#ff6641"/>
+</svg>
