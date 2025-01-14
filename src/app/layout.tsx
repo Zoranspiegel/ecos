@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 const bauhausFont = localFont({
   src: './fonts/bauhaus/BauhausRegular.ttf',
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${bauhausFont.variable} antialiased`}>{children}</body>
+      <body className={`${bauhausFont.variable} antialiased`}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

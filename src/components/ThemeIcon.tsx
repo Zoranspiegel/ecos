@@ -1,27 +1,19 @@
 'use state';
 
-import { useState } from 'react';
+import { useThemeContext } from '@/contexts/ThemeContext';
 
 export default function ThemeIcon() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-
-  function handleClick() {
-    if (theme === 'dark') {
-      setTheme('light');
-    } else {
-      setTheme('dark');
-    }
-  }
+  const { theme, toggleTheme } = useThemeContext();
 
   return (
     <button
       className="relative h-[90%] aspect-square rounded-full overflow-hidden"
-      onClick={handleClick}
+      onClick={toggleTheme}
     >
       <svg
         viewBox="0 0 14 14"
         fill="none"
-        className={`${theme === 'light' ? '' : 'rotate-180'} transition-all`}
+        className={`${theme === 'light' ? 'rotate-180' : ''} transition-all`}
       >
         {/* DARK */}
         <path d="M7,7 L0,7 A7,7 0 0,0 7,14" className="fill-[#211814]" />

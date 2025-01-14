@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root.light {
   --background: #f9f9f9;
   --foreground: #211814;
   --bauhaus-red-color: #ff6641;

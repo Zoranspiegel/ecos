@@ -38,7 +38,7 @@ export default function AdminIcon({ active }: { active: boolean }) {
         </g>
         {/* <!-- Círculo central --> */}
         <circle cx="0" cy="0" r="4.5" className={`fill-${active ? 'redhaus' : 'foreground'}`} />
-        <circle cx="0" cy="0" r="2" fill="black" />
+        <circle cx="0" cy="0" r="2" className='fill-background' />
       </g>
     </svg>
   );
