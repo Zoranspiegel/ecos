@@ -7,7 +7,7 @@ import HomeIcon from '@/components/HomeIcon';
 import EcoIcon from '@/components/EcoIcon';
 import SocialIcon from '@/components/SocialIcon';
 import AdminIcon from '@/components/AdminIcon';
-import ThemeIcon from '@/components/ThemeIcon';
+import ThemeBtn from '@/components/ThemeBtn';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <nav className="border-4 border-double border-foreground rounded-l-full bg-background pl-1 pr-3 flex items-center justify-between">
-      <ThemeIcon />
+      <ThemeBtn />
       <Link href="/feed" className="h-[60%] aspect-square">
         <HomeIcon active={pathname.startsWith('/feed')} />
       </Link>

@@ -2,8 +2,10 @@
 
 import { useThemeContext } from '@/contexts/ThemeContext';
 
-export default function ThemeIcon() {
+export default function ThemeBtn() {
   const { theme, toggleTheme } = useThemeContext();
+
+  if (!theme) return null;
 
   return (
     <button
