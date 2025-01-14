@@ -1,5 +1,5 @@
 export default function FollowersPage() {
   return (
-    <div>FOLLOWERS_PAGE</div>
+    <div>SOCIAL_PAGE</div>
   );
 }

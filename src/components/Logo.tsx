@@ -8,9 +8,9 @@ export default function Logo() {
       <path d="M22,7 L15,7 A7,7 0 0,0 22,14" className='fill-bluehaus' />
       <circle cx="30" cy="7" r="7" className='fill-foreground' />
       <rect x="41.5" y="0" width="10.5" height="7" className='fill-yellowhaus' />
-      <circle cx="41.5" cy="3.5" r="3.5" className='fill-yellowhaus' />
+      <circle cx="42.5" cy="3.5" r="3.5" className='fill-yellowhaus' />
       <rect x="38" y="7" width="10.5" height="7" className='fill-yellowhaus' />
-      <circle cx="48.5" cy="10.5" r="3.5" className='fill-yellowhaus' />
+      <circle cx="47.5" cy="10.5" r="3.5" className='fill-yellowhaus' />
     </svg>
   );
 }

@@ -1,37 +1,33 @@
 'use client';
 
-import {
-  FaHome,
-  FaComment,
-  FaUsers,
-  FaUserFriends,
-  FaCog
-} from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import useUserProfile from '@/hooks/useUserProfile';
+import HomeIcon from '@/components/HomeIcon';
+import EcoIcon from '@/components/EcoIcon';
+import SocialIcon from '@/components/SocialIcon';
+import AdminIcon from '@/components/AdminIcon';
+import ThemeIcon from '@/components/ThemeIcon';
 
 export default function Navbar() {
   const pathname = usePathname();
   const { data } = useUserProfile();
 
   return (
-    <nav className="border-4 border-double border-foreground rounded-l-full bg-background flex items-center justify-evenly">
-      <Link href="/feed" className={`${pathname.startsWith('/feed') ? 'text-redhaus' : 'text-foreground'} text-4xl`}>
-        <FaHome />
+    <nav className="border-4 border-double border-foreground rounded-l-full bg-background pl-1 pr-3 flex items-center justify-between">
+      <ThemeIcon />
+      <Link href="/feed" className="h-[60%] aspect-square">
+        <HomeIcon active={pathname.startsWith('/feed')} />
       </Link>
-      <Link href="/post" className={`${pathname.startsWith('/post') ? 'text-redhaus' : 'text-foreground'} text-3xl`}>
-        <FaComment />
+      <Link href="/post" className="h-[60%] aspect-square">
+        <EcoIcon active={pathname.startsWith('/post')} />
       </Link>
-      <Link href="/followers" className={`${pathname.startsWith('/followers') ? 'text-redhaus' : 'text-foreground'} text-4xl`}>
-        <FaUserFriends />
-      </Link>
-      <Link href="/following" className={`${pathname.startsWith('/following') ? 'text-redhaus' : 'text-foreground'} text-4xl`}>
-        <FaUsers />
+      <Link href="/social" className="h-[60%] aspect-square">
+        <SocialIcon active={pathname.startsWith('/social')} />
       </Link>
       {data?.is_admin && (
-        <Link href="/admin" className={`${pathname.startsWith('/admin') ? 'text-redhaus' : 'text-yellowhaus'} text-3xl`}>
-          <FaCog />
+        <Link href="/admin" className="h-[60%] aspect-square">
+          <AdminIcon active={pathname.startsWith('/admin')} />
         </Link>
       )}
     </nav>
