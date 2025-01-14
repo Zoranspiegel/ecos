@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #211814;
+  --foreground: #f9f9f9;
+  --bauhaus-red-color: #c0373e;
+  --bauhaus-blue-color: #254ea6;
+  --bauhaus-yellow-color: #dcc574;
+  --background-image: url('../svgs/bauhaus-dark.svg');
+}
+
 :root.light {
   --background: #f9f9f9;
   --foreground: #211814;
@@ -9,15 +18,6 @@
   --bauhaus-blue-color: #236df6;
   --bauhaus-yellow-color: #fed132;
   --background-image: url('../svgs/bauhaus-light.svg');
-}
-
-:root.dark {
-  --background: #211814;
-  --foreground: #f9f9f9;
-  --bauhaus-red-color: #c0373e;
-  --bauhaus-blue-color: #254ea6;
-  --bauhaus-yellow-color: #dcc574;
-  --background-image: url('../svgs/bauhaus-dark.svg');
 }
 
 *::-webkit-scrollbar {
