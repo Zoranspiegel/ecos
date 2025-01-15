@@ -15,7 +15,7 @@ export default function ThemeBtn() {
       <svg
         viewBox="0 0 14 14"
         fill="none"
-        className={`${theme === 'light' ? 'rotate-180' : ''} transition-all`}
+        className={`${theme === 'light' ? '' : 'rotate-180'} transition-all`}
       >
         {/* DARK */}
         <path d="M7,7 L0,7 A7,7 0 0,0 7,14" className="fill-[#211814]" />
