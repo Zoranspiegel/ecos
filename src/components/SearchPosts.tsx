@@ -23,7 +23,7 @@ export default function SearchPosts({
     if (inputRef.current) {
       inputRef.current.value = '';
     }
-    debouncedSetSearch('');
+    setSearch('');
   }
 
   return (

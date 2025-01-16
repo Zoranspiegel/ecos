@@ -14,7 +14,7 @@ export default function PostsContainer({
   setLoadMore: Dispatch<SetStateAction<boolean>>;
   content: string;
 }) {
-  const { data, isLoading, error } = usePosts(page, content);
+  const { data, isLoading, error } = usePosts({ page, content });
 
   useEffect(() => {
     if (data?.length === 0) setLoadMore(false);

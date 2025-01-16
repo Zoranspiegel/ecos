@@ -2,15 +2,14 @@ import { PostsSchema } from '@/models/Post';
 import { fetcher } from '@/utils/fetcher';
 import useSWR from 'swr';
 
-function getUrl(key: string, page: number, content?: string, username?: number) {
-  if (username) return `${key}?username=${username}&page=${page}`;
-  if (content) return `${key}/search?content=${content}&page=${page}`;
-  return `${key}/feed?page=${page}`;
+function getUrl({ page, content, userID }: { page: number, content?: string, userID?: number }) {
+  if (userID) return `/api/posts/${userID}?page=${page}`;
+  if (content) return `/api/posts/search?content=${content}&page=${page}`;
+  return `/api/posts/feed?page=${page}`;
 }
 
-export default function usePosts(page: number, content?: string, username?: number) {
-  const KEY = '/api/posts';
-  const url = getUrl(KEY, page, content, username);
+export default function usePosts({ page, content, userID}: { page: number, content?: string, userID?: number }) {
+  const url = getUrl({ page, content, userID });
   const { data, ...args } = useSWR(url, fetcher);
 
   return {
