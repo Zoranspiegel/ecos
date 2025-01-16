@@ -7,14 +7,14 @@ import Image from 'next/image';
 import Loading from './Loading';
 
 export default function HeaderUser() {
-  const { data, isLoading, isValidating, error } = useUserProfile();
+  const { data, isLoading, error } = useUserProfile();
   const router = useRouter();
 
   useEffect(() => {
-    if (error && !isValidating) {
+    if (error) {
       router.push('/');
     }
-  }, [error, isValidating, router]);
+  }, [error, router]);
 
   if (isLoading)
     return (
