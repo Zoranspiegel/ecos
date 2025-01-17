@@ -1,6 +1,8 @@
+import { NextRequest, NextResponse } from 'next/server';
 import { getClient } from '@/db';
 import { UsersSchema } from '@/models/User';
-import { NextRequest, NextResponse } from 'next/server';
+import { jwtVerify } from 'jose';
+import env from '@/env';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
@@ -10,7 +12,28 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const userSearch = searchParams.get('user_search');
 
     // SEARCH USERS BY NAME
+    // - - - - - - - - - - - 
     if (userSearch !== undefined) {
+      // GET LOGGED IN USER ID
+      const cookiestore = request.cookies;
+
+      const cookie = cookiestore.get('jwt-token');
+
+      if (!cookie?.value) {
+        return NextResponse.json({ error: 'Unauthenticated' }, { status: 403 });
+      }
+
+      const token = cookie.value;
+      const jwtSecret = new TextEncoder().encode(env.JWT_SECRET);
+
+      const { payload } = await jwtVerify(token, jwtSecret);
+
+      if (!payload.sub) {
+        return NextResponse.json({ error: 'Unauthenticated' }, { status: 403 });
+      }
+
+      const { id } = JSON.parse(payload.sub);
+
       // LIMIT & KEY WORD
       const LIMIT = 5;
       const keyWord = `%${userSearch}%`;
@@ -22,9 +45,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       const usersSearchRes = await client.query(
         `SELECT id, username, avatar, is_admin, created_at, updated_at FROM PUBLIC.users
         WHERE username ILIKE $1
+        AND id != $2
         ORDER BY created_at DESC
-        LIMIT $2`,
-        [keyWord, LIMIT]
+        LIMIT $3`,
+        [keyWord, id, LIMIT]
       );
 
       await client.end();
@@ -40,10 +64,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
       return NextResponse.json(data, { status: 200 });
     } else {
-      return NextResponse.json(
-        [],
-        { status: 500 }
-      );
+      return NextResponse.json([], { status: 500 });
     }
   } catch (error) {
     if (error instanceof Error) {
