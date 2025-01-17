@@ -6,9 +6,10 @@ import SearchUsers from '@/components/SearchUsers';
 import SearchPosts from '@/components/SearchPosts';
 
 export default function FeedPage() {
-  const [page, setPage] = useState(1);
-  const [loadMore, setLoadMore] = useState(true);
-  const [search, setSearch] = useState('');
+  const [page, setPage] = useState<number>(1);
+  const [loadMore, setLoadMore] = useState<boolean>(true);
+  const [content, setContent] = useState<string>('');
+  const [userID, setUserID] = useState<string>('');
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +19,7 @@ export default function FeedPage() {
       scrollAreaRef.current.scrollTop = 0;
     }
     setLoadMore(true);
-  }, [search]);
+  }, [content]);
 
   // INFINITE SCROLL INTERSECTION OBSERVER
   useEffect(() => {
@@ -48,14 +49,14 @@ export default function FeedPage() {
 
   // POST PAGES
   const postPages = Array.from({ length: page }, (_, i) => (
-    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content={search}/>
+    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content={content} userID={userID} />
   ));
 
   return (
     <div className="h-full p-2 grid grid-rows-[7%,1fr] gap-4 overflow-hidden">
-      <div className="flex items-center justify-evenly gap-2">
-        <SearchUsers />
-        <SearchPosts setSearch={setSearch} />
+      <div className="z-10 flex items-center justify-evenly gap-2">
+        <SearchUsers setUserID={setUserID} />
+        <SearchPosts setContent={setContent} />
       </div>
       <div className="overflow-auto scroll-smooth" ref={scrollAreaRef} >
         {postPages}

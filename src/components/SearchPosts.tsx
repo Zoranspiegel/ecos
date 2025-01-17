@@ -4,18 +4,18 @@ import { useRef } from 'react';
 import { debounce } from 'lodash';
 
 export default function SearchPosts({
-  setSearch
+  setContent
 }: {
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // DEBOUNCED SET SEARCH
-  const debouncedSetSearch = debounce((search) => setSearch(search), 500);
+  const debouncedSetContent = debounce((search) => setContent(search), 500);
 
   // HANDLE INPUT CHANGE
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    debouncedSetSearch(e.target.value);
+    debouncedSetContent(e.target.value);
   }
 
   // HANDLE CLEAR SEARCH
@@ -23,7 +23,7 @@ export default function SearchPosts({
     if (inputRef.current) {
       inputRef.current.value = '';
     }
-    setSearch('');
+    setContent('');
   }
 
   return (

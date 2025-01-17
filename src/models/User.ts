@@ -2,7 +2,10 @@ import { z } from 'zod';
 
 export const AuthUserSchema = z
   .object({
-    username: z.string().min(2, 'Username must contain at least 2 characters'),
+    username: z
+      .string()
+      .min(2, 'Username must contain at least 2 characters')
+      .max(15, "Username can't be longer than 15 characters"),
     password: z.string(),
     confirm: z
       .string()
@@ -35,5 +38,7 @@ export const UserSchema = z.object({
   created_at: z.date().or(z.string()),
   updated_at: z.date().or(z.string())
 });
+
+export const UsersSchema = z.array(UserSchema);
 
 export type User = z.infer<typeof UserSchema>;
