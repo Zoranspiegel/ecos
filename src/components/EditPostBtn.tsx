@@ -3,10 +3,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { mutate } from 'swr';
 
-export default function EditPostBtn({ postID }: { postID: string }) {
+export default function EditPostBtn({
+  postID,
+  setEditing
+}: {
+  postID: string;
+  setEditing: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [optionsVisibility, setOptionsVisibility] = useState<boolean>(false);
   const [deleteVisibility, setDeleteVisibility] = useState<boolean>(false);
-  const editPanelRef = useRef<HTMLDivElement>(null);  
+  const editPanelRef = useRef<HTMLDivElement>(null);
 
   // HANDLE PANEL VISIBILITY
   useEffect(() => {
@@ -17,6 +23,7 @@ export default function EditPostBtn({ postID }: { postID: string }) {
       ) {
         setOptionsVisibility(true);
       } else {
+        setDeleteVisibility(false);
         setOptionsVisibility(false);
       }
     }
@@ -28,12 +35,18 @@ export default function EditPostBtn({ postID }: { postID: string }) {
     };
   }, []);
 
+  // HANDLE EDIT
+  function handleEdit() {
+    setOptionsVisibility(false);
+    setEditing(true);
+  }
+
   // HANDLE POST DELETE
   async function handlePostDelete() {
     const res = await fetch(`/api/posts/${postID}`, {
       method: 'DELETE'
     });
-    
+
     if (res.ok) {
       mutate((key: string) => key.startsWith('/api/posts'));
     }
@@ -48,7 +61,10 @@ export default function EditPostBtn({ postID }: { postID: string }) {
       </div>
       {optionsVisibility && (
         <div className="absolute top-0 right-0 w-8 h-16 border-4 border-double border-foreground bg-bluehaus flex flex-col items-center justify-evenly box-content">
-          <div className="flex items-center justify-center cursor-pointer">
+          <div
+            className="flex items-center justify-center cursor-pointer"
+            onClick={handleEdit}
+          >
             E
           </div>
           <div
@@ -60,9 +76,16 @@ export default function EditPostBtn({ postID }: { postID: string }) {
           {deleteVisibility && (
             <div className="absolute right-full -top-1 -bottom-1 w-40 border-4 border-double border-foreground bg-redhaus flex flex-col items-center justify-evenly">
               <div>CONFIRM?</div>
-              <div className='w-full flex items-center justify-evenly'>
-                <div className='cursor-pointer' onClick={handlePostDelete}>Y</div>
-                <div className='cursor-pointer' onClick={() => setDeleteVisibility(false)}>N</div>
+              <div className="w-full flex items-center justify-evenly">
+                <div className="cursor-pointer" onClick={handlePostDelete}>
+                  Y
+                </div>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setDeleteVisibility(false)}
+                >
+                  N
+                </div>
               </div>
             </div>
           )}
