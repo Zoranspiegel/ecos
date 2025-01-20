@@ -14,6 +14,6 @@ export default function usePosts({ page, content, userID}: { page: number, conte
 
   return {
     ...args,
-    data: PostsSchema.safeParse(data).data
+    posts: PostsSchema.safeParse(data).data
   }
 }

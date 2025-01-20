@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import PostsContainer from '@/components/PostsContainer';
 import NewPost from '@/components/NewPost';
-import useUserProfile from '@/hooks/useUserProfile';
+import useLoggedInUser from '@/hooks/useLoggedInUser';
 
 export default function PostPage() {
-  const { data } = useUserProfile();
+  const { loggedInUser } = useLoggedInUser();
   const [page, setPage] = useState<number>(1);
   const [loadMore, setLoadMore] = useState<boolean>(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -34,11 +34,11 @@ export default function PostPage() {
     }
   }, [loadMore]);
 
-  if (!data) return null;
+  if (!loggedInUser) return null;
 
   // POST PAGES
   const postPages = Array.from({ length: page }, (_, i) => (
-    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content='' userID={data?.id} />
+    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content='' userID={loggedInUser?.id} />
   ));
 
   return (

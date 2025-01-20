@@ -2,12 +2,12 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import useUserProfile from '@/hooks/useUserProfile';
+import useLoggedInUser from '@/hooks/useLoggedInUser';
 import Image from 'next/image';
 import Loading from './Loading';
 
 export default function HeaderUser() {
-  const { data, isLoading, error } = useUserProfile();
+  const { loggedInUser, isLoading, error } = useLoggedInUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -27,18 +27,18 @@ export default function HeaderUser() {
 
   return (
     <div className="h-full flex items-center justify-center gap-2">
-      <span className={`text-xl ${data?.is_admin ? 'text-redhaus' : ''}`}>
-        {data?.username}
+      <span className={`text-xl ${loggedInUser?.is_admin ? 'text-redhaus' : ''}`}>
+        {loggedInUser?.username}
       </span>
       <div className="relative h-full aspect-square border-4 border-double border-foreground rounded-full flex items-center justify-center overflow-hidden">
-        {data?.avatar ? (
+        {loggedInUser?.avatar ? (
           <Image
-            src={data?.avatar}
-            alt={`${data?.username}'s profile picture`}
+            src={loggedInUser?.avatar}
+            alt={`${loggedInUser?.username}'s profile picture`}
             fill
           />
         ) : (
-          <h1 className="text-3xl uppercase">{data?.username[0]}</h1>
+          <h1 className="text-3xl uppercase">{loggedInUser?.username[0]}</h1>
         )}
       </div>
     </div>

@@ -16,11 +16,11 @@ export default function PostsContainer({
   content: string;
   userID: string;
 }) {
-  const { data, isLoading, error } = usePosts({ page, content, userID });
+  const { posts, isLoading, error } = usePosts({ page, content, userID });
 
   useEffect(() => {
-    if (data?.length === 0) setLoadMore(false);
-  }, [data, setLoadMore]);
+    if (posts?.length === 0) setLoadMore(false);
+  }, [posts, setLoadMore]);
 
   if (isLoading) return <PostsSkeleton />;
 
@@ -28,7 +28,7 @@ export default function PostsContainer({
 
   return (
     <div>      
-      {data?.map((post) => (
+      {posts?.map((post) => (
         <Post key={post.id} post={post} personal={userID === post.user_id} />
       ))}
     </div>
