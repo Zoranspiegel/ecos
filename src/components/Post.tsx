@@ -1,9 +1,10 @@
 import type { Post } from '@/models/Post';
 import Image from 'next/image';
+import EditPostBtn from './EditPostBtn';
 
-export default function Post({ post }: { post: Post }) {
+export default function Post({ post, personal = false }: { post: Post; personal?: boolean }) {
   return (
-    <div key={post.id} className="mb-4 mr-2 grid grid-cols-[20%,1fr] gap-4">
+    <div key={post.id} className="relative mb-4 mr-2 grid grid-cols-[20%,1fr] gap-4">
       <div className="relative w-full aspect-square border-4 border-double border-foreground rounded-full overflow-hidden">
         {post.avatar ? (
           <Image
@@ -31,6 +32,7 @@ export default function Post({ post }: { post: Post }) {
         )}`}</span>
         <p>{post.content}</p>
       </div>
+      {personal && <EditPostBtn postID={post.id} />}
     </div>
   );
 }

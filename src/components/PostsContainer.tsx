@@ -27,9 +27,9 @@ export default function PostsContainer({
   if (error) return null;
 
   return (
-    <div>
+    <div>      
       {data?.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} personal={userID === post.user_id} />
       ))}
     </div>
   );
