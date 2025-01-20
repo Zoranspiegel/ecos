@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { mutate } from 'swr';
 
 export default function EditPostBtn({ postID }: { postID: string }) {
   const [optionsVisibility, setOptionsVisibility] = useState<boolean>(false);
   const [deleteVisibility, setDeleteVisibility] = useState<boolean>(false);
-  const editPanelRef = useRef<HTMLDivElement>(null);
+  const editPanelRef = useRef<HTMLDivElement>(null);  
 
   // HANDLE PANEL VISIBILITY
   useEffect(() => {
@@ -28,8 +29,15 @@ export default function EditPostBtn({ postID }: { postID: string }) {
   }, []);
 
   // HANDLE POST DELETE
-  function handlePostDelete() {
-    console.log('DELETING POST', postID);
+  async function handlePostDelete() {
+    const res = await fetch(`/api/posts/${postID}`, {
+      method: 'DELETE'
+    });
+    
+    if (res.ok) {
+      mutate((key: string) => key.startsWith('/api/posts'));
+    }
+
     setDeleteVisibility(false);
   }
 

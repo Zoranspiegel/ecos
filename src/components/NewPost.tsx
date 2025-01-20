@@ -38,7 +38,7 @@ export default function NewPost() {
         value={newPost}
         placeholder="Share your voice..."
       />
-      <button className="w-[30%] border-4 border-double rounded-full p-2 text-2xl hover:bg-bluehaus hover:text-background hover:font-bold">Post</button>
+      <button className="w-[30%] border-4 border-double rounded-full p-2 text-2xl hover:bg-bluehaus hover:font-bold">Post</button>
     </form>
   );
 }
