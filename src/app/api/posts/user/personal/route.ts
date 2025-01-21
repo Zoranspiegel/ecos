@@ -1,11 +1,35 @@
 import { getClient } from '@/db';
 import { PostsSchema } from '@/models/Post';
+import { jwtVerify } from 'jose';
 import { NextRequest, NextResponse } from 'next/server';
+import env from '@/env';
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ userID: string }> }): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    // CHECK USER ID ROUTE PARAM
-    const { userID } = await params;
+    // LOGGED IN USER ID
+    const cookieStore = request.cookies;
+    const cookie = cookieStore.get('jwt-token');
+
+    if (!cookie?.value) {
+      return NextResponse.json(
+        { error: 'Unauthenticated' },
+        { status: 403 }
+      );
+    }
+    
+    const token = cookie.value;
+    const jwtSecret = new TextEncoder().encode(env.JWT_SECRET);
+    
+    const { payload } = await jwtVerify(token, jwtSecret);
+    
+    if (!payload?.sub) {
+      return NextResponse.json(
+        { error: 'Unauthenticated' },
+        { status: 403 }
+      );
+    }
+
+    const userID = (JSON.parse(payload.sub)).id;
 
     // SEARCH PARAMS
     const { searchParams } = request.nextUrl;

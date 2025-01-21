@@ -9,14 +9,18 @@ export default function PostsContainer({
   page,
   setLoadMore,
   content,
-  userID
+  userID,
+  personal,
+  setToTop
 }: {
   page: number;
   setLoadMore: React.Dispatch<React.SetStateAction<boolean>>;
-  content: string;
-  userID: string;
+  content?: string;
+  userID?: string;
+  personal?: boolean
+  setToTop?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { posts, isLoading, error } = usePosts({ page, content, userID });
+  const { posts, isLoading, error } = usePosts({ page, content, userID, personal });
 
   useEffect(() => {
     if (posts?.length === 0) setLoadMore(false);
@@ -29,7 +33,7 @@ export default function PostsContainer({
   return (
     <div>      
       {posts?.map((post) => (
-        <Post key={post.id} post={post} personal={userID === post.user_id} />
+        <Post key={post.id} post={post} personal={personal} setToTop={setToTop} />
       ))}
     </div>
   );

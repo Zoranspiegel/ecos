@@ -8,10 +8,12 @@ import EditPostBtn from './EditPostBtn';
 
 export default function Post({
   post,
-  personal = false
+  personal,
+  setToTop
 }: {
   post: Post;
   personal?: boolean;
+  setToTop?: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const [editing, setEditing] = useState<boolean>(false);
   const [editContent, setEditContent] = useState<string>(post.content);
@@ -42,6 +44,9 @@ export default function Post({
       mutate((key: string) => key.startsWith('/api/posts'));
     }
 
+    if (setToTop) {
+      setToTop(true);
+    }
     setEditing(false);
   }
 
@@ -69,8 +74,12 @@ export default function Post({
         >
           {post.username}
         </h1>
-        <span className="mb-2 text-xs opacity-50">{`Created ${new Date(
-          post.created_at
+        <span className="mb-2 text-xs opacity-50">{`${
+          post.created_at === post.updated_at ? 'Created' : 'Edited'
+        } ${new Date(
+          post.created_at === post.updated_at
+            ? post.created_at
+            : post.updated_at
         ).toLocaleString('en-us', {
           year: 'numeric',
           month: 'short',

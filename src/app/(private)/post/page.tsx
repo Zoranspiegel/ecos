@@ -3,14 +3,21 @@
 import { useEffect, useRef, useState } from 'react';
 import PostsContainer from '@/components/PostsContainer';
 import NewPost from '@/components/NewPost';
-import useLoggedInUser from '@/hooks/useLoggedInUser';
 
 export default function PostPage() {
-  const { loggedInUser } = useLoggedInUser();
   const [page, setPage] = useState<number>(1);
+  const [toTop, setToTop] = useState(false);
   const [loadMore, setLoadMore] = useState<boolean>(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  // SCROLL TO TOP
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = 0;
+    }
+    setToTop(false);
+  }, [toTop]);
 
   // INFINITE SCROLL INTERSECTION OBSERVER
   useEffect(() => {
@@ -34,11 +41,9 @@ export default function PostPage() {
     }
   }, [loadMore]);
 
-  if (!loggedInUser) return null;
-
   // POST PAGES
   const postPages = Array.from({ length: page }, (_, i) => (
-    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content='' userID={loggedInUser?.id} />
+    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} personal={true} setToTop={setToTop} />
   ));
 
   return (

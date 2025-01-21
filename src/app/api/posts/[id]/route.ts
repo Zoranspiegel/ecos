@@ -42,7 +42,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
     const editedPostRes = await client.query(
       `UPDATE PUBLIC.posts
-      SET content = $1
+      SET content = $1, updated_at = NOW()
       WHERE user_id = $2 AND id = $3
       RETURNING id`,
       [content, userID, id]

@@ -18,8 +18,10 @@ export default function FeedPage() {
     if (scrollAreaRef.current) {
       scrollAreaRef.current.scrollTop = 0;
     }
+    console.log('CHANGED');    
+    setPage(1);
     setLoadMore(true);
-  }, [content]);
+  }, [content, userID]);
 
   // INFINITE SCROLL INTERSECTION OBSERVER
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function FeedPage() {
 
   // POST PAGES
   const postPages = Array.from({ length: page }, (_, i) => (
-    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content={content} userID={userID} />
+    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content={content} userID={userID} personal={false}/>
   ));
 
   return (
@@ -58,7 +60,7 @@ export default function FeedPage() {
         <SearchUsers setUserID={setUserID} />
         <SearchPosts setContent={setContent} />
       </div>
-      <div className="overflow-auto scroll-smooth" ref={scrollAreaRef} >
+      <div className="overflow-auto" ref={scrollAreaRef} >
         {postPages}
         <div className="h-2" ref={loadMoreRef}></div>
       </div>
