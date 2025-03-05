@@ -44,7 +44,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
       const usersSearchRes = await client.query(
         `SELECT id, username, avatar, is_admin, created_at, updated_at FROM PUBLIC.users
-        WHERE username ILIKE $1
+        WHERE username LIKE $1
         AND id != $2
         ORDER BY created_at DESC
         LIMIT $3`,

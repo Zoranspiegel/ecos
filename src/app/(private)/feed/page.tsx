@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import PostsContainer from '@/components/PostsContainer';
-import SearchUsers from '@/components/SearchUsers';
-import SearchPosts from '@/components/SearchPosts';
+import { useState, useEffect, useRef } from "react";
+import PostsContainer from "@/components/PostsContainer";
+import SearchUsers from "@/components/SearchUsers";
+import SearchPosts from "@/components/SearchPosts";
 
 export default function FeedPage() {
   const [page, setPage] = useState<number>(1);
   const [loadMore, setLoadMore] = useState<boolean>(true);
-  const [content, setContent] = useState<string>('');
-  const [userID, setUserID] = useState<string>('');
+  const [content, setContent] = useState<string>("");
+  const [userID, setUserID] = useState<string>("");
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +18,6 @@ export default function FeedPage() {
     if (scrollAreaRef.current) {
       scrollAreaRef.current.scrollTop = 0;
     }
-    console.log('CHANGED');    
     setPage(1);
     setLoadMore(true);
   }, [content, userID]);
@@ -33,7 +32,7 @@ export default function FeedPage() {
           setPage((prevState) => prevState + 1);
         }
       },
-      { root: null, rootMargin: '0px', threshold: 0.1 }
+      { root: null, rootMargin: "0px", threshold: 0.1 }
     );
 
     const currentLoadMoreRef = loadMoreRef.current;
@@ -51,7 +50,14 @@ export default function FeedPage() {
 
   // POST PAGES
   const postPages = Array.from({ length: page }, (_, i) => (
-    <PostsContainer key={i} page={i} setLoadMore={setLoadMore} content={content} userID={userID} personal={false}/>
+    <PostsContainer
+      key={i}
+      page={i}
+      setLoadMore={setLoadMore}
+      content={content}
+      userID={userID}
+      personal={false}
+    />
   ));
 
   return (
@@ -60,7 +66,7 @@ export default function FeedPage() {
         <SearchUsers setUserID={setUserID} />
         <SearchPosts setContent={setContent} />
       </div>
-      <div className="overflow-auto" ref={scrollAreaRef} >
+      <div className="overflow-auto" ref={scrollAreaRef}>
         {postPages}
         <div className="h-2" ref={loadMoreRef}></div>
       </div>

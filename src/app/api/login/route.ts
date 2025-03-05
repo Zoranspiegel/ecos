@@ -27,7 +27,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     await client.connect();
 
     const userRes = await client.query(
-      'SELECT id, password FROM users WHERE username ILIKE $1',
+      'SELECT id, password FROM users WHERE username LIKE $1',
       [username]
     );
 

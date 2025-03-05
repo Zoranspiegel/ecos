@@ -13,7 +13,7 @@ async function loadFakeAdmin (username: string): Promise<void> {
     await client.query('begin');
 
     const userExistsRes = await client.query(
-      'select id from users where username ilike $1',
+      'select id from users where username LIKE $1',
       [username]
     );
 

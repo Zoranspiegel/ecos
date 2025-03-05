@@ -1,0 +1,1 @@
+type followsT = 'following' | 'followers';

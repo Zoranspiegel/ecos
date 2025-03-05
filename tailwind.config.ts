@@ -42,6 +42,9 @@ export default {
         loading2: 'loading2 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         loading3: 'loading3 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         loading4: 'loading4 1s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+      },
+      boxShadow: {
+        'thickness': '0px 4px 0px 0px'
       }
     }
   },
