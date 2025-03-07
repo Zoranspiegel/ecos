@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const FollowsUserSchema = z.object({
   id: z.string(),
   username: z.string(),
-  avatar: z.string().url(),
+  avatar: z.string().url().nullable(),
   is_admin: z.boolean(),
   created_at: z.string().or(z.date()),
   followed_back: z.boolean().optional()
@@ -11,4 +11,4 @@ export const FollowsUserSchema = z.object({
 
 export const FollowsUsersSchema = z.array(FollowsUserSchema);
 
-export type FollowsUser = z.infer<typeof FollowsUserSchema>
+export type FollowsUser = z.infer<typeof FollowsUserSchema>;

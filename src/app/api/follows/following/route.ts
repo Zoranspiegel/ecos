@@ -9,7 +9,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     // LIMIT, PAGE & OFFSET SETTING
     const { searchParams } = request.nextUrl;
 
-    const LIMIT = 20;
+    const LIMIT = 9;
     const page = Number(searchParams.get('page')) || 0;
     const offset = page * LIMIT;
 
