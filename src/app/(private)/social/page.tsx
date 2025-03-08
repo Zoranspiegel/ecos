@@ -8,12 +8,15 @@ export default function FollowersPage() {
   const [followsType, setFollowsType] = useState<followsT>("following");
   const [page, setPage] = useState<number>(1);
   const [loadMore, setLoadMore] = useState<boolean>(true);
-  const loadMoreRef = useRef(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // PAGE & LOAD MORE RESET
+  // SCROLL & LOAD MORE RESET
   useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = 0;
+    }
     setLoadMore(true);
-    setPage(1);
   }, [followsType]);
 
   // INFINITE SCROLL INTERSECTION OBSERVER
@@ -55,7 +58,7 @@ export default function FollowersPage() {
   return (
     <div className="h-full p-2 grid grid-rows-[5%,1fr] gap-4">
       <FollowsToggleBtn type={followsType} setType={setFollowsType} />
-      <div className="overflow-auto">
+      <div ref={scrollAreaRef} className="overflow-auto">
         {pages}
         <div ref={loadMoreRef} className="h-2"></div>
       </div>
