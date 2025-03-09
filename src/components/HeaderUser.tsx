@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import useLoggedInUser from '@/hooks/useLoggedInUser';
 import Image from 'next/image';
 import Loading from './Loading';
+import Link from 'next/link';
 
 export default function HeaderUser() {
   const { loggedInUser, isLoading, error } = useLoggedInUser();
@@ -27,10 +28,16 @@ export default function HeaderUser() {
 
   return (
     <div className="h-full flex items-center justify-center gap-2">
-      <span className={`text-xl ${loggedInUser?.is_admin ? 'text-redhaus' : ''}`}>
+      <Link
+        className={`text-xl ${loggedInUser?.is_admin ? 'text-redhaus' : ''}`}
+        href='/account'
+      >
         {loggedInUser?.username}
-      </span>
-      <div className="relative h-full aspect-square border-4 border-double border-foreground rounded-full flex items-center justify-center overflow-hidden">
+      </Link>
+      <Link
+        className="relative h-full aspect-square border-4 border-double border-foreground rounded-full flex items-center justify-center overflow-hidden"
+        href='/account'
+      >
         {loggedInUser?.avatar ? (
           <Image
             src={loggedInUser?.avatar}
@@ -40,7 +47,7 @@ export default function HeaderUser() {
         ) : (
           <h1 className="text-3xl uppercase">{loggedInUser?.username[0]}</h1>
         )}
-      </div>
+      </Link>
     </div>
   );
 }

@@ -36,7 +36,8 @@ export const UserSchema = z.object({
   avatar: z.string().nullable(),
   is_admin: z.boolean(),
   created_at: z.date().or(z.string()),
-  updated_at: z.date().or(z.string())
+  updated_at: z.date().or(z.string()),
+  followed_back: z.boolean().optional()
 });
 
 export const UsersSchema = z.array(UserSchema);

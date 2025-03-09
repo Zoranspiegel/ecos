@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { mutate } from 'swr';
 import Image from 'next/image';
 import EditPostBtn from './EditPostBtn';
+import Link from 'next/link';
 
 export default function Post({
   post,
@@ -55,7 +56,10 @@ export default function Post({
       key={post.id}
       className="relative mb-4 mr-2 grid grid-cols-[20%,1fr] gap-4"
     >
-      <div className="relative w-full aspect-square border-4 border-double border-foreground rounded-full overflow-hidden">
+      <Link
+        className="relative w-full aspect-square border-4 border-double border-foreground rounded-full overflow-hidden"
+        href={personal ? '/account' : `/${post.username}`}
+      >
         {post.avatar ? (
           <Image
             src={post.avatar}
@@ -67,13 +71,14 @@ export default function Post({
             {post.username[0]}
           </div>
         )}
-      </div>
+      </Link>
       <div className="flex flex-col">
-        <h1
+        <Link
           className={`text-xl font-bold ${post.is_admin ? 'text-redhaus' : ''}`}
+          href={personal ? '/account' : `/${post.username}`}
         >
           {post.username}
-        </h1>
+        </Link>
         <span className="mb-2 text-xs opacity-50">{`${
           post.created_at === post.updated_at ? 'Created' : 'Edited'
         } ${new Date(
