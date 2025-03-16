@@ -64,7 +64,7 @@ export default function UploadAvatarBtn() {
         className="hidden"
         onChange={handleChange}
       />
-      <button className="rounded-full bg-redhaus px-4 py-2">Submit</button>
+      <button hidden={!avatar} disabled={!avatar} className="rounded-full bg-redhaus px-4 py-2">Submit</button>
     </form>
   );
 }
