@@ -49,7 +49,7 @@ export default function UploadAvatarBtn() {
     <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit}>
       {typeof avatar?.file === "string" && (
         <div className="relative w-12 aspect-square">
-          <Image src={avatar.file} fill alt="" />
+          <Image src={avatar.file} fill alt="Selected image" />
         </div>
       )}
       <label

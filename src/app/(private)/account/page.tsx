@@ -19,7 +19,7 @@ export default function AccountPage() {
           {user.avatar ? (
             <Image
               src={user.avatar}
-              alt=""
+              alt={`${user.username}'s avatar image`}
               fill
             />
           ) : (

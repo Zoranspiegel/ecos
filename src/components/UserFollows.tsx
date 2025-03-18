@@ -12,7 +12,7 @@ export default function UserFollows({ user }: { user: FollowsUser }) {
           href={`/${user.username}`}
         >
           {user.avatar ? (
-            <Image src={user.avatar} fill alt="" />
+            <Image src={user.avatar} fill alt={`${user.username}'s avatar image`} />
           ) : (
             <div className="text-3xl">{user.username[0]}</div>
           )}
