@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import usePosts from '@/hooks/usePosts';
 import Post from './Post';
-import PostsSkeleton from '@/components/skeletons/PostsSkeleton';
+import PostSkeletons from '@/components/skeletons/PostSkeletons';
 
 export default function PostsContainer({
   page,
@@ -26,7 +26,7 @@ export default function PostsContainer({
     if (posts?.length === 0) setLoadMore(false);
   }, [posts, setLoadMore]);
 
-  if (isLoading) return <PostsSkeleton />;
+  if (isLoading) return <PostSkeletons />;
 
   if (error) return null;
 

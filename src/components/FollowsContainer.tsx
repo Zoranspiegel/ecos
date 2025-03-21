@@ -2,6 +2,7 @@ import useFollows from "@/hooks/useFollows";
 import { FollowsUser } from "@/models/Follows";
 import UserFollows from "./UserFollows";
 import { useEffect } from "react";
+import FollowsSkeletons from "./skeletons/FollowsSkeletons";
 
 export default function FollowsContainer({
   type,
@@ -22,7 +23,7 @@ export default function FollowsContainer({
     }
   }, [followsUsers, setLoadMore]);
 
-  if (isLoading) return;
+  if (isLoading) return <FollowsSkeletons />;
   if (error) return <div>ERROR</div>;
 
   return (

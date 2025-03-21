@@ -1,6 +1,6 @@
 import PostSkeleton from './PostSkeleton';
 
-export default function PostsSkeleton() {
+export default function PostSkeletons() {
   const skeletonCards = Array.from({ length: 6 }, (_, i) => {
     switch (i % 4) {
       case 0:
