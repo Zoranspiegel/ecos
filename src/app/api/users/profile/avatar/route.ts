@@ -55,7 +55,7 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
     try {
       const result = await cloudinary.uploader.upload(file, {
         public_id: name,
-        folder: 'Profile Images/Ecos'
+        folder: 'Ecos/Profile Images'
       });
       
       avatarImage.url = result.secure_url;

@@ -7,6 +7,7 @@ import { mutate } from "swr";
 export default function NewPost() {
   const [newPost, setNewPost] = useState<string>("");
   const [postImage, setPostImage] = useState<ImageState | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     return () => {
@@ -52,20 +53,26 @@ export default function NewPost() {
   // SUBMIT NEW POST
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const fetchURL = "/api/posts";
-    const res = await fetch(fetchURL, {
-      method: "POST",
-      body: JSON.stringify({
-        content: newPost,
-        image: postImage
-      }),
+    if (loading) return;
+
+    setLoading(true);
+
+    const body = JSON.stringify({
+      content: newPost,
+      image: postImage
     });
     setNewPost("")
     setPostImage(null);
 
+    const fetchURL = "/api/posts";
+    const res = await fetch(fetchURL, {
+      method: "POST",
+      body,
+    });
+    setLoading(false);
+
     if (res.ok) {
-      const resJSON = await res.json();
-      mutate((key: string) => key.startsWith(fetchURL), resJSON.data);
+      mutate((key: string) => key.startsWith(fetchURL));
     }
   }
 
@@ -93,7 +100,7 @@ export default function NewPost() {
           disabled={!newPost && !postImage}
           type="submit"
         >
-          POST
+          {loading ? 'LOADING...' : 'POST'}
         </button>
         <div className="flex">
           {postImage ? (

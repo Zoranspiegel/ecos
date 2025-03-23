@@ -6,6 +6,8 @@ import useLoggedInUser from "@/hooks/useLoggedInUser";
 
 export default function UploadAvatarBtn() {
   const [avatar, setAvatar] = useState<ImageState | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { mutate } = useLoggedInUser();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -28,15 +30,21 @@ export default function UploadAvatarBtn() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (loading) return;
+
+    const body = JSON.stringify(avatar);
     
     const res = await fetch('/api/users/profile/avatar', {
       method: 'PUT',
-      body: JSON.stringify(avatar)
+      body
     });
-
+    
+    setLoading(false);
+    
     if (res.ok) {
-      mutate();
       setAvatar(null);
+      mutate();
     }
   }
 
