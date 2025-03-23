@@ -46,14 +46,22 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
     }
 
     // CLOUDINARY NEW AVATAR SAVE
-    let avatarImage;
+    interface AvatarImage {
+      url?: string;
+      width?: number;
+      height?: number;
+    }
+    const avatarImage: AvatarImage = {};
     try {
       const result = await cloudinary.uploader.upload(file, {
         public_id: name,
         folder: 'Profile Images/Ecos'
       });
       
-      avatarImage = result.secure_url;
+      avatarImage.url = result.secure_url;
+      // avatarImage.width = result.width;
+      // avatarImage.height = result.height;
+
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.stack);
@@ -75,7 +83,7 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
       `UPDATE PUBLIC.users
       SET avatar = $1
       WHERE id = $2`,
-      [avatarImage, id]
+      [avatarImage.url, id]
     );
 
     await client.end();
