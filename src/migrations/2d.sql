@@ -1,0 +1,2 @@
+DROP INDEX IF EXISTS images_post_id_index;
+DROP TABLE IF EXISTS PUBLIC.images;

@@ -4,13 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import useLoggedInUser from "@/hooks/useLoggedInUser";
 
-interface Avatar {
-  file: string | ArrayBuffer | null;
-  name: string;
-}
-
 export default function UploadAvatarBtn() {
-  const [avatar, setAvatar] = useState<Avatar | null>(null);
+  const [avatar, setAvatar] = useState<ImageState | null>(null);
   const { mutate } = useLoggedInUser();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

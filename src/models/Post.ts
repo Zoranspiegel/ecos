@@ -6,6 +6,11 @@ export const PostSchema = z.object({
   username: z.string(),
   avatar: z.string().url().nullable(),
   is_admin: z.boolean(),
+  img: z.object({
+    url: z.string().url().nullable(),
+    width: z.number().nullable(),
+    height: z.number().nullable()
+  }),
   content: z.string(),
   created_at: z.string().or(z.date()),
   updated_at: z.string().or(z.date())

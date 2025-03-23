@@ -20,8 +20,15 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     await client.connect();
 
     const postsByUserIDRes = await client.query(
-      `SELECT U.username, U.avatar, U.is_admin, P.* FROM PUBLIC.posts P
+      `SELECT U.username, U.avatar, U.is_admin, P.*,
+      JSON_BUILD_OBJECT (
+        'url', i.url,
+        'width', i.width,
+        'height', i.height
+      ) AS img
+      FROM PUBLIC.posts P
       INNER JOIN PUBLIC.users U ON P.user_id = U.id
+      LEFT JOIN public.images i ON p.id = i.post_id
       WHERE U.id = $1
       ORDER BY P.updated_at DESC
       LIMIT $2 OFFSET $3`,

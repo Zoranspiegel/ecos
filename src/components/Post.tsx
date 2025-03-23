@@ -73,12 +73,14 @@ export default function Post({
         )}
       </Link>
       <div className="flex flex-col">
-        <Link
-          className={`text-xl font-bold ${post.is_admin ? 'text-redhaus' : ''}`}
-          href={personal ? '/account' : `/${post.username}`}
-        >
-          {post.username}
-        </Link>
+        <div>
+          <Link
+            className={`text-xl font-bold ${post.is_admin ? 'text-redhaus' : ''}`}
+            href={personal ? '/account' : `/${post.username}`}
+          >
+            {post.username}
+          </Link>
+        </div>
         <span className="mb-2 text-xs opacity-50">{`${
           post.created_at === post.updated_at ? 'Created' : 'Edited'
         } ${new Date(
@@ -92,6 +94,7 @@ export default function Post({
           hour: 'numeric',
           minute: 'numeric'
         })}`}</span>
+        {post.img.url && <Image src={post.img.url} width={post.img.width!} height={post.img.height!} alt={`${post.username}'s post image`}/>}
         {editing ? (
           <form className="relative" onSubmit={handleEditSubmit}>
             <textarea

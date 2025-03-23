@@ -47,9 +47,9 @@ export default function PostPage() {
   ));
 
   return (
-    <div className='h-full p-2 grid grid-rows-[35%,1fr] gap-4'>
+    <div className='flex flex-col h-full p-2 gap-4'>
       <NewPost />
-      <div className='h-full overflow-auto' ref={scrollAreaRef} >
+      <div className='h-full flex-2 overflow-auto' ref={scrollAreaRef} >
         {postPages}        
         <div className='h-2' ref={loadMoreRef}></div>
       </div>
