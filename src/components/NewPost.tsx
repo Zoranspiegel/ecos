@@ -29,7 +29,7 @@ export default function NewPost() {
 
     const compressedImage = await imageCompression(image, {
       maxSizeMB: 4,
-      maxWidthOrHeight: 2000,
+      maxWidthOrHeight: 1500,
       useWebWorker: true,
     });
 
@@ -68,6 +68,7 @@ export default function NewPost() {
       content: newPost,
       image: postImage,
     });
+
     setNewPost("");
     setPostImage(null);
 
