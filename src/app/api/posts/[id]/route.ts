@@ -108,12 +108,6 @@ export async function DELETE(
       [id]
     );
 
-    const imageUrl = imageRes.rows[0].url;
-
-    const publicID = decodeURIComponent(
-      imageUrl.match(/\/upload\/v\d+\/(.+?)(\.[a-z]+)?$/i)[1]
-    );
-
     // POST DELETE
     const deletedPost = await client.query(
       `DELETE FROM PUBLIC.posts
@@ -129,16 +123,24 @@ export async function DELETE(
     }
 
     // CLOUDINARY IMAGE DESTROY
-    try {
-      await cloudinary.uploader.destroy(publicID);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.stack);
-      }
-      return NextResponse.json(
-        { error: "Internal Server Error" },
-        { status: 500 }
+    if (imageRes.rowCount) {
+      const imageUrl = imageRes.rows[0].url;
+
+      const publicID = decodeURIComponent(
+        imageUrl.match(/\/upload\/v\d+\/(.+?)(\.[a-z]+)?$/i)[1]
       );
+
+      try {
+        await cloudinary.uploader.destroy(publicID);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.stack);
+        }
+        return NextResponse.json(
+          { error: "Internal Server Error" },
+          { status: 500 }
+        );
+      }
     }
 
     return NextResponse.json({ msg: "Post delete success" }, { status: 201 });
