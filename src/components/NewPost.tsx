@@ -1,5 +1,6 @@
 "use client";
 
+import imageCompression from "browser-image-compression";
 import NextImage from "next/image";
 import { useEffect, useState } from "react";
 import { mutate } from "swr";
@@ -12,7 +13,7 @@ export default function NewPost() {
   useEffect(() => {
     return () => {
       setPostImage(null);
-    }
+    };
   }, []);
 
   // HANDLE CHANGE NEW POST
@@ -21,10 +22,16 @@ export default function NewPost() {
   }
 
   // HANDLE CHANGE UPLOAD IMAGE
-  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files || !e.target.files[0]) return;
 
     const image = e.target.files[0];
+
+    const compressedImage = await imageCompression(image, {
+      maxSizeMB: 4,
+      maxWidthOrHeight: 2000,
+      useWebWorker: true,
+    });
 
     const reader = new FileReader();
 
@@ -42,7 +49,7 @@ export default function NewPost() {
       };
     };
 
-    reader.readAsDataURL(image);
+    reader.readAsDataURL(compressedImage);
   }
 
   // HANDLE CLEAR IMAGE
@@ -59,9 +66,9 @@ export default function NewPost() {
 
     const body = JSON.stringify({
       content: newPost,
-      image: postImage
+      image: postImage,
     });
-    setNewPost("")
+    setNewPost("");
     setPostImage(null);
 
     const fetchURL = "/api/posts";
@@ -77,7 +84,10 @@ export default function NewPost() {
   }
 
   return (
-    <form className="h-full flex-1 flex flex-col items-center" onSubmit={handleSubmit}>
+    <form
+      className="h-full flex-1 flex flex-col items-center"
+      onSubmit={handleSubmit}
+    >
       <textarea
         className="w-full h-full border-4 border-double border-foreground bg-background p-4 text-lg resize-none outline-none"
         onChange={handleTextChange}
@@ -100,7 +110,7 @@ export default function NewPost() {
           disabled={!newPost && !postImage}
           type="submit"
         >
-          {loading ? 'LOADING...' : 'POST'}
+          {loading ? "LOADING..." : "POST"}
         </button>
         <div className="flex">
           {postImage ? (

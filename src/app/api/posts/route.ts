@@ -1,9 +1,8 @@
 import { getClient } from "@/db";
-import env from "@/env";
 import { jwtVerify } from "jose";
 import { NextRequest, NextResponse } from "next/server";
-import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
-import sharp from "sharp";
+import { v2 as cloudinary } from "cloudinary";
+import env from "@/env";
 
 cloudinary.config({
   cloud_name: env.CLOUDINARY_CLOUD_NAME,
@@ -46,52 +45,18 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const newImage: NewImage = {};
 
     if (image) {
-      // TRANSFORM IMAGE FILE DATA URL TO BUFFER
-      const imageBuffer = Buffer.from(image.file.split(",")[1], "base64");
-
-      // COMPRESS & RESIZE IMAGE IF NEEDED USING SHARP LIBRARY
-      const resizedImageBuffer = await sharp(imageBuffer)
-        .resize({
-          width: 2000,
-          height: 2000,
-          fit: "inside",
-          withoutEnlargement: true,
-        })
-        .toFormat("jpeg", { quality: 80 })
-        .toBuffer();
-
-      // UPLOAD SHARP RETURNED BUFFER TO CLOUDINARY
       try {
-        const cloudinaryResult: UploadApiResponse = await new Promise(
-          (resolve, reject) => {
-            const uploadStream = cloudinary.uploader.upload_stream(
-              {
-                public_id: image.name,
-                folder: "Ecos/Images",
-              },
-              (err, result) => {
-                if (err) reject(err);
-                else resolve(result as UploadApiResponse);
-              }
-            );
+        const result = await cloudinary.uploader.upload(image.file, {
+          public_id: image.name,
+          folder: "Ecos/Images",
+        });
 
-            uploadStream.end(resizedImageBuffer); // BUFFER SENT
-          }
-        );
-
-        newImage.url = cloudinaryResult.secure_url;
-        newImage.width = cloudinaryResult.width;
-        newImage.height = cloudinaryResult.height;
+        newImage.url = result.secure_url;
+        newImage.width = result.width;
+        newImage.height = result.height;
       } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.stack);
-        } else {
-          console.error(error);
-        }
-        return NextResponse.json(
-          { error: "Internal Server Error" },
-          { status: 500 }
-        );
+        console.error(error);
+        return NextResponse.json({ error }, { status: 500 });
       }
     }
 
