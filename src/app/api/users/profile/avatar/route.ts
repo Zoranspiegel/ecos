@@ -52,9 +52,10 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
       height?: number;
     }
     const avatarImage: AvatarImage = {};
+    const public_id = name.split('.').slice(0,-1).join('.');
     try {
       const result = await cloudinary.uploader.upload(file, {
-        public_id: name,
+        public_id,
         folder: 'Ecos/Profile Images'
       });
       

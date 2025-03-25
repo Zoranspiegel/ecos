@@ -43,11 +43,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       height?: number;
     }
     const newImage: NewImage = {};
+    const public_id = image.name.split('.').slice(0,-1).join('.');
 
     if (image) {
       try {
         const result = await cloudinary.uploader.upload(image.file, {
-          public_id: image.name,
+          public_id,
           folder: "Ecos/Images",
         });
 
